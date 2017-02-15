@@ -1,0 +1,56 @@
+﻿{% extends "webui/layout.html" %}
+
+{% block content %}
+
+<h3>{{ title }}</h3>
+<p> {{ application_intro }}</p>
+
+{% if user.is_authenticated %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?department={{ department }}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?department={{ department }}&page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <thread>
+                <tr>
+                    <th width="60%">应用程序名称</th>
+                    <th width="40%">操作</th>
+                </tr>
+            </thread>
+            <tbody>
+                {% for application in page_obj %}
+                    <tr>
+                        <td>{{ application.name }}</td>
+                        <td>
+                            <a href="/tags?department={{ department }}&application={{ application.name }}" class="btn btn-primary">{{ browse }}</a>
+                            <a href="/editor" class="btn btn-primary">{{ build }}</a>
+                        </td>
+                    </tr>                        
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>
+
+{% else %}
+
+    <div class="alert alert-danger">
+      <p>{{ requirslogin }}</p>
+    </div>
+
+{% endif %}
+
+{% endblock %}

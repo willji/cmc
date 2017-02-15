@@ -1,0 +1,69 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% load pagination_tags %}
+{% autopaginate applicationtag_list %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        <a href="{% url 'webui-applicationtag-create' %}" class="btn btn-success">{{ create }}</a>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form action="/applicationtags/" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    {{ form.keyword }}
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<nav class="pull-right">
+    {% paginate %}
+</nav>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="10%">应用程序名称</th>
+                <th width="40%">文件相对路径</th>
+                <th width="10%">文件中已使用模板标签数量</th>
+                <th width="15%">最后修改者</th>
+                <th width="15%">最后更新时间</th>
+                <th width="20%">操作</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for applicationtag in applicationtag_list %}
+                <tr>
+                    <td>{{ applicationtag.application }}</td>
+                    <td>{{ applicationtag.file_path }}</td>
+                    <td>{{ applicationtag.tags.count }}</td>
+                    <td>{{ applicationtag.last_modified_by }}</td>
+                    <td>{{ applicationtag.modified_date }}</td>
+                    <td>
+                        {% if perms.api.change_applicationtag %}
+                            <a href="{% url 'webui-applicationtag-update' applicationtag.pk %}">{{ update }}</a>
+                        {% endif %}
+
+                        {% if perms.api.delete_applicationtag %}
+                            <a href="{% url 'webui-applicationtag-delete' applicationtag.pk %}">{{ delete }}</a>
+                        {% endif %}
+                    </td>
+                </tr>                        
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}

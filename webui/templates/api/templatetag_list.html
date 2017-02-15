@@ -1,0 +1,70 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% load pagination_tags %}
+{% load guardian_tags %}
+{% autopaginate templatetag_list %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        <a href="{% url 'webui-templatetag-create' %}" class="btn btn-success">{{ create }}</a>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form action="/templatetags/" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    {{ form.keyword }}
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<nav class="pull-right">
+    {% paginate %}
+</nav>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="30%">模板标签名称</th>
+                <th width="20%">描述</th>
+                <th width="15%">最后修改者</th>
+                <th width="15%">最后更新时间</th>
+                <th width="20%">操作</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for templatetag in templatetag_list %}
+                <tr>
+                    <td>{{ templatetag.name }}</td>
+                    <td>{{ templatetag.description }}</td>
+                    <td>{{ templatetag.last_modified_by }}</td>
+                    <td>{{ templatetag.modified_date }}</td>
+                    <td>
+                        {% if perms.api.change_templatetag %}
+                            <a href="{% url 'webui-templatetag-update' templatetag.pk %}">{{ update }}</a>
+                        {% endif %}
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'webui-templatetag-delete' templatetag.pk %}">{{ delete }}</a>
+                        {% endif %}
+
+                        <a href="{% url 'templatetagapps' templatetag.pk %}" target="_blank">{{ templatetagapps }}</a>
+                    </td>
+                </tr>                        
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}

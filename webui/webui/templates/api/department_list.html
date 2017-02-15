@@ -1,0 +1,58 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        {% if user.is_superuser %}
+            <div>
+                <p>
+                    <a href="{% url 'webui-department-create' %}" class="btn btn-success">{{ create }}</a>
+                </p>
+            </div>
+        {% endif %}
+    </nav>
+</div>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="20%">部门名称</th>
+                <th width="20%">描述</th>
+                <th width="15%">关联应用程序数量</th>
+                <th width="15%">最后修改者</th>
+                <th width="15%">最后更新时间</th>
+                <th width="15%">操作</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for department in department_list %}
+                <tr>
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.description }}</td>
+                    <td>{{ department.applications.count }}</td>
+                    <td>{{ department.last_modified_by }}</td>
+                    <td>{{ department.modified_date }}</td>
+                    <td>
+                        {% if perms.api.change_department %}
+                            <a href="{% url 'webui-department-update' department.pk %}">{{ update }}</a>
+                        {% endif %}
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'webui-department-delete' department.pk %}">{{ delete }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}

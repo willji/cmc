@@ -1,0 +1,30 @@
+django<1.9
+django-extensions
+djangorestframework
+djangorestframework-filters
+django-filter
+django-vanilla-views
+wheel
+django_select2==4.3.1
+django-simple_history
+django-guardian
+pyapi-gitlab
+django-pagination-bootstrap
+cryptography
+django-fernet-fields
+ghdiff
+
+# celery
+celery[redis]==3.1.19
+django-celery==3.1.17
+flower==0.8.3
+
+# Requires python-ldap before install django-auth-ldap
+# MySql-python
+# python-ldap
+# django-auth-ldap
+
+django-debug-toolbar
+
+# if pip install failed, please run following command
+# yum install libffi-devel.x86_64 openssl-devel.x86_64 openldap-devel

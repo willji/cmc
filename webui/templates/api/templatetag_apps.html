@@ -1,0 +1,44 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<p></p>
+
+<div class="row">
+    {% if not hasexception %}
+        {% if applicationtags %}
+            <table class="table">
+                <thread>
+                    <tr>
+                        <th width="30%">模板标签名称</th>
+                        <th width="30%">应用名称</th>
+                        <th width="40%">配置文件相对路径</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for applicationtag in applicationtags %}
+                        <tr>
+                            <td>{{ templatetag.name }}</td>
+                            <td>{{ applicationtag.application.name }}</td>
+                            <td>{{ applicationtag.file_path }}</td>
+                        </tr>                        
+                    {% endfor %}
+                </tbody>
+            </table> 
+        {% else %}
+            <div class="alert alert-warning">
+                {{ unusedtag }}
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-danger">
+            {{ nosuchtag }}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

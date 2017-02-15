@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>cfgmgmtcenter</Name>
+    <RootNamespace>cfgmgmtcenter</RootNamespace>
+    <InterpreterId>{8fabdb6e-f1d8-4d06-a646-252b25b84e76}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+    <WebBrowserPort>8000</WebBrowserPort>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>6de71f35-8e04-4e07-bdbb-130cd52d71f9</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="api\admin.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="api\models.py" />
+    <Compile Include="api\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="api\signals.py" />
+    <Compile Include="api\tasks.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="api\tests.py" />
+    <Compile Include="api\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="api\views.py" />
+    <Compile Include="api\__init__.py" />
+    <Compile Include="cfgmgmtcenter\celery.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="common\models.py" />
+    <Compile Include="common\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="common\tests.py" />
+    <Compile Include="common\views.py" />
+    <Compile Include="common\__init__.py" />
+    <Compile Include="UtilityScripts\grant_non_prod_tagvalue_perms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="webui\forms.py" />
+    <Compile Include="webui\utilities.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="webui\models.py" />
+    <Compile Include="webui\templatetags\webui_extras.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="webui\templatetags\__init__.py" />
+    <Compile Include="webui\tests.py" />
+    <Compile Include="webui\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="webui\views.py" />
+    <Compile Include="webui\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="cfgmgmtcenter\__init__.py" />
+    <Compile Include="cfgmgmtcenter\settings.py" />
+    <Compile Include="cfgmgmtcenter\urls.py" />
+    <Compile Include="cfgmgmtcenter\wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="api\" />
+    <Folder Include="api\templates\" />
+    <Folder Include="common\" />
+    <Folder Include="common\templates\" />
+    <Folder Include="UtilityScripts\" />
+    <Folder Include="webui\" />
+    <Folder Include="webui\static\" />
+    <Folder Include="webui\static\webui\" />
+    <Folder Include="webui\static\webui\css\" />
+    <Folder Include="webui\static\webui\fonts\" />
+    <Folder Include="webui\static\webui\imgs\" />
+    <Folder Include="webui\static\webui\scripts\" />
+    <Folder Include="webui\templates\" />
+    <Folder Include="webui\templates\api\" />
+    <Folder Include="webui\templates\webui\" />
+    <Folder Include="cfgmgmtcenter\" />
+    <Folder Include="webui\templatetags\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="api\templates\index.html" />
+    <Content Include="common\templates\index.html" />
+    <Content Include="CHANGELOG.MD" />
+    <Content Include="README.MD" />
+    <Content Include="requirements.txt" />
+    <Content Include="db.sqlite3" />
+    <Content Include="UtilityScripts\AnalyzeRedisMongoMQ.ps1" />
+    <Content Include="UtilityScripts\CMC_Gitlab_FixPassword.ps1" />
+    <Content Include="UtilityScripts\GetProjectNames.ps1" />
+    <Content Include="UtilityScripts\CMC_Redis_Register.ps1" />
+    <Content Include="UtilityScripts\CMC_Gitlab_Register.ps1" />
+    <Content Include="UtilityScripts\GetTagValues.ps1" />
+    <Content Include="UtilityScripts\GitCmdWrapper.psm1" />
+    <Content Include="UtilityScripts\ImportTemplateTags_Redis.ps1" />
+    <Content Include="UtilityScripts\InitData.ps1" />
+    <Content Include="UtilityScripts\CloneRepos.ps1" />
+    <Content Include="UtilityScripts\RetrieveConnectionStrings.ps1" />
+    <Content Include="UtilityScripts\SearchProject.ps1" />
+    <Content Include="UtilityScripts\PostData.ps1" />
+    <Content Include="UtilityScripts\templatetags_fix.ps1" />
+    <Content Include="UtilityScripts\ReplaceMongoDbTemplateTags.ps1" />
+    <Content Include="UtilityScripts\UpdateTemplateTagsFile.ps1" />
+    <Content Include="webui\static\webui\css\bootstrap.css" />
+    <Content Include="webui\static\webui\css\bootstrap.min.css" />
+    <Content Include="webui\static\webui\css\site.css" />
+    <Content Include="webui\static\webui\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="webui\static\webui\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="webui\static\webui\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="webui\static\webui\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="webui\static\webui\imgs\people.png" />
+    <Content Include="webui\static\webui\scripts\bootstrap.js" />
+    <Content Include="webui\static\webui\scripts\bootstrap.min.js" />
+    <Content Include="webui\static\webui\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="webui\static\webui\scripts\jquery-1.10.2.js" />
+    <Content Include="webui\static\webui\scripts\jquery-1.10.2.min.js" />
+    <Content Include="webui\static\webui\scripts\jquery-1.10.2.min.map" />
+    <Content Include="webui\static\webui\scripts\jquery-1.11.3.js" />
+    <Content Include="webui\static\webui\scripts\jquery-2.1.4.min.js" />
+    <Content Include="webui\static\webui\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="webui\static\webui\scripts\jquery.validate.js" />
+    <Content Include="webui\static\webui\scripts\jquery.validate.min.js" />
+    <Content Include="webui\static\webui\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="webui\static\webui\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="webui\static\webui\scripts\modernizr-2.6.2.js" />
+    <Content Include="webui\static\webui\scripts\respond.js" />
+    <Content Include="webui\static\webui\scripts\respond.min.js" />
+    <Content Include="webui\static\webui\scripts\_references.js" />
+    <Content Include="webui\templates\api\application_move.html" />
+    <Content Include="webui\templates\api\department_confirm_delete.html" />
+    <Content Include="webui\templates\api\environment_confirm_delete.html" />
+    <Content Include="webui\templates\api\package_comparsion_partial.html" />
+    <Content Include="webui\templates\api\package_comparsion.html" />
+    <Content Include="webui\templates\api\package_list.html" />
+    <Content Include="webui\templates\api\applicationtag_confirm_delete.html" />
+    <Content Include="webui\templates\api\templatetag_confirm_delete.html" />
+    <Content Include="webui\templates\api\tagvalue_confirm_delete.html" />
+    <Content Include="webui\templates\api\environment_form.html" />
+    <Content Include="webui\templates\api\tagvalue_form.html" />
+    <Content Include="webui\templates\api\environment_list.html" />
+    <Content Include="webui\templates\api\applicationtag_form.html" />
+    <Content Include="webui\templates\api\applicationtag_copy.html" />
+    <Content Include="webui\templates\api\template_tag_value_add.html" />
+    <Content Include="webui\templates\api\templatetag_form.html" />
+    <Content Include="webui\templates\api\application_form.html" />
+    <Content Include="webui\templates\api\tagvalue_list.html" />
+    <Content Include="webui\templates\api\applicationtag_list.html" />
+    <Content Include="webui\templates\api\templatetag_apps.html" />
+    <Content Include="webui\templates\api\templatetag_list.html" />
+    <Content Include="webui\templates\api\application_list.html" />
+    <Content Include="webui\templates\api\department_form.html" />
+    <Content Include="webui\templates\api\department_list.html" />
+    <Content Include="webui\templates\webui\about.html" />
+    <Content Include="webui\templates\webui\applications.html" />
+    <Content Include="webui\templates\api\package_form.html" />
+    <Content Include="webui\templates\webui\authorization.html" />
+    <Content Include="webui\templates\webui\ops_help.html" />
+    <Content Include="webui\templates\webui\test_help.html" />
+    <Content Include="webui\templates\webui\dev_help.html" />
+    <Content Include="webui\templates\webui\index.html" />
+    <Content Include="webui\templates\webui\layout.html" />
+    <Content Include="webui\templates\webui\login.html" />
+    <Content Include="webui\templates\webui\loginpartial.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>{8fabdb6e-f1d8-4d06-a646-252b25b84e76}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>env (Python 64-bit 2.7)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

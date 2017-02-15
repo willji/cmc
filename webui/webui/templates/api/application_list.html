@@ -1,0 +1,73 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% load pagination_tags %}
+{% autopaginate application_list %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        
+        {# only dev groups can add applications  #}
+        {% if showcreate %}
+        <a href="{% url 'webui-application-create' %}" class="btn btn-success">{{ create }}</a>
+        {% endif  %}
+        
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form action="/applications/" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    {{ form.keyword }}
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<nav class="pull-right">
+    {% paginate %}
+</nav>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="30%">应用程序名称</th>
+                <th width="20%">描述</th>
+                <th width="15%">最后修改者</th>
+                <th width="15%">最后更新时间</th>
+                <th width="20%">操作</th>
+
+            </tr>
+        </thread>
+        <tbody>
+            {% for application in application_list %}
+                <tr>
+                    <td>{{ application.name }}</td>
+                    <td>{{ application.description }}</td>
+                    <td>{{ application.last_modified_by }}</td>
+                    <td>{{ application.modified_date }}</td>
+                    <td>
+                        {% if perms.api.change_application %}
+                            <a href="{% url 'webui-application-update' application.pk %}">{{ update }}</a>
+                        {% endif %}
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'webui-application-delete' application.pk %}">{{ delete }}</a>
+                        {% endif %}
+                    </td>
+                </tr>                        
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}

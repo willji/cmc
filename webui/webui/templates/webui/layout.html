@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - 洋码头配置管理中心</title>
+    {% load staticfiles %}
+    {% load django_select2_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'webui/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'webui/css/site.css' %}" />
+    <script src="{% static 'webui/scripts/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'webui/scripts/modernizr-2.6.2.js' %}"></script>
+	{% import_django_select2_js %}
+	{% import_django_select2_css %}
+    {% load webui_extras %}
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">洋码头配置管理中心</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">主页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'webui-application-list' %}">应用列表</a></li>
+                            <li><a href="{% url 'webui-department-list' %}">部门列表</a></li>
+                            {# only super user can see environment list#}
+                            {% if user.is_superuser %}
+                                <li><a href="{% url 'webui-environment-list' %}">环境列表</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'webui-templatetag-list' %}">模板标签</a></li>
+                            <li><a href="{% url 'webui-tagvalue-list' %}">模板标签值</a></li>
+                            <li><a href="{% url 'webui-applicationtag-list' %}">应用标签</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'addtemplatetagvalues' %}">添加模板标签及值</a></li>
+                            <li><a href="{% url 'copyapplicationtags' %}">复制应用标签</a></li>
+                            {# only ops group or superuser can move application from one department to another#}
+                            {% if user.is_superuser or user|is_groupmember:'ops' %}
+                                <li><a href="{% url 'moveapplication' %}">修改应用程序隶属关系</a></li>
+                            {% endif %}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'webui-package-list' %}">配置文件包</a></li>
+                            <li><a href="{% url 'webui-package-comparison' %}">比较配置文件包</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'about' %}">关于</a></li>
+                </ul>
+                {% include 'webui/loginpartial.html' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        {% block content %}
+        {% endblock %}
+        <div class="container">
+            <footer class="modal-footer">
+                <p class="text-center">&copy; {{ year }} - 洋码头配置管理中心</p>
+            </footer>            
+        </div>
+    </div>
+    
+    <script src="{% static 'webui/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'webui/scripts/respond.js' %}"></script>
+    {% block scripts %}
+        
+    {% endblock %}
+
+</body>
+</html>

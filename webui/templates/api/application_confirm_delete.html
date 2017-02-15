@@ -1,0 +1,36 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h2>{{ title }}</h2>
+    <hr />
+
+    <div class="row">
+        <form action="." method="POST" class="form-horizontal">
+            {% csrf_token %}
+
+            <p class="alert alert-warning">
+                {{ delete_confirmation }}
+            </p>
+
+            <p class="text-center">
+                <input type="submit" class="btn btn-danger" value="{{ btnsubmit }}" />
+                <a href="{% url 'webui-application-list' %}" class="btn btn-default"> {{ btncancel }} </a>
+            </p>
+
+            {% if form.errors %}
+            <p class="validation-summary-errors">{{ form.errors }}</p>
+            {% endif %}
+        </form>
+    </div>
+{% else %}
+
+    <div class="alert alert-danger">
+      <p>{{ requirslogin }}</p>
+    </div>
+
+{% endif %}
+
+{% endblock %}

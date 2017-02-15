@@ -1,0 +1,28 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<hr />
+
+<div class="row">
+    <form action="." method="POST" class="form-horizontal">
+        {% csrf_token %}
+
+        <p class="alert alert-warning">
+            {{ delete_confirmation }}
+        </p>
+
+        {% if form.errors and form.errors|get_item:"__all__" %}
+        <div class="alert alert-danger"><p>{{ form.errors|get_item:"__all__" }}</p></div>
+        {% endif %}
+
+        <p class="text-center">
+            <input type="submit" class="btn btn-danger" value="{{ btnsubmit }}" />
+            <a href="{% url 'webui-applicationtag-list' %}" class="btn btn-default"> {{ btncancel }} </a>
+        </p>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<hr />
+
+<div class="row">
+    <form action="." method="POST" class="form-horizontal">
+        {# manually set form field ordering #}
+        {# django 1.9 will support field_order #}
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ field.id_application }}" class="col-md-4 control-label">{{ form.application.label }}</label>
+            <div class="col-md-8">
+                {{ form.application }}
+                {% if form.errors %}
+                    {% if form.errors|get_item:application %}
+                        <font color="#FF000000"> {{ form.errors|get_item:application }} </font>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ field.id_environment }}" class="col-md-4 control-label">{{ form.environment.label }}</label>
+            <div class="col-md-8">
+                {{ form.environment }}
+                {% if form.errors %}
+                    {% if form.errors|get_item:environment %}
+                        <font color="#FF000000"> {{ form.errors|get_item:environment }} </font>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ field.id_branch_name }}" class="col-md-4 control-label">{{ form.branch_name.label }}</label>
+            <div class="col-md-8">
+                {{ form.branch_name }}
+                {% if form.errors %}
+                    {% if form.errors|get_item:branch_name %}
+                        <font color="#FF000000"> {{ form.errors|get_item:branch_name }} </font>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ field.id_target_platform }}" class="col-md-4 control-label">{{ form.target_platform.label }}</label>
+            <div class="col-md-8">
+                {{ form.target_platform }}
+                {% if form.errors %}
+                    {% if form.errors|get_item:target_platform %}
+                        <font color="#FF000000"> {{ form.errors|get_item:target_platform }} </font>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ field.id_description }}" class="col-md-4 control-label">{{ form.description.label }}</label>
+            <div class="col-md-8">
+                {{ form.description }}
+                {% if form.errors %}
+                    {% if form.errors|get_item:description %}
+                        <font color="#FF000000"> {{ form.errors|get_item:description }} </font>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        {% if form.errors and form.errors|get_item:"__all__" %}
+        <div class="alert alert-danger"><p>{{ form.errors|get_item:"__all__" }}</p></div>
+        {% endif %}
+
+        <p class="text-center">
+            <input type="submit" class="btn btn-primary" value="{{ btnsubmit }}" />
+            <a href="{% url 'webui-package-list' %}" class="btn btn-default"> {{ btncancel }} </a>
+        </p>
+    </form>
+</div>
+
+{% if form.errors %}
+<div class="alert alert-danger"><p>{{ form.errors|get_item:"__all__" }}</p></div>
+{% endif %}
+
+{% endblock %}

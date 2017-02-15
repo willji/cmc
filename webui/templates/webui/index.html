@@ -1,0 +1,41 @@
+{% extends "webui/layout.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>{{ intro_title }}</h1>
+    <p class="lead">{{ intro_para }}</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3 class="text-center"> {{ imdeveloper }} </h3>
+        <p class="text-center">
+            <img src="{% static 'webui/imgs/people.png' %}" />
+        </p>
+        <p class="text-center">
+            <a href="{% url 'devhelp' %}" class="btn btn-default"> {{ manage }} </a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3 class="text-center">{{ imtest }}</h3>
+        <p class="text-center">
+            <img src="{% static 'webui/imgs/people.png' %}" />
+        </p>
+        <p class="text-center">
+            <a href="{% url 'testhelp' %}" class="btn btn-default"> {{ manage }} </a>
+        </p>  
+    </div>
+    <div class="col-md-4">
+        <h3 class="text-center">{{ imops }}</h3>
+        <p class="text-center">
+            <img src="{% static 'webui/imgs/people.png' %}" />
+        </p>
+        <p class="text-center">
+            <a href="{% url 'opshelp' %}" class="btn btn-default"> {{ manage }} </a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

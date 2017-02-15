@@ -1,0 +1,74 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% load guardian_tags %}
+{% load pagination_tags %}
+{% autopaginate tagvalue_list %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        <a href="{% url 'webui-tagvalue-create' %}" class="btn btn-success">{{ create }}</a>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form action="/tagvalues/" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    {{ form.keyword }}
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<nav class="pull-right">
+    {% paginate %}
+</nav>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="20%">模板标签名称</th>
+                <th width="10%">环境</th>
+                <th width="30%">值</th>
+                <th width="10%">最后修改者</th>
+                <th width="20%">最后更新时间</th>
+                <th width="10%">操作</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for tagvalue in tagvalue_list %}
+                <tr>
+                    <td>{{ tagvalue.tag.name }}</td>
+                    <td>{{ tagvalue.environment }}</td>
+                    <td>
+                        <div style="word-break:break-all">
+                            {{ tagvalue.value }}
+                        </div>
+                    </td>
+                    <td>{{ tagvalue.last_modified_by }}</td>
+                    <td>{{ tagvalue.modified_date }}</td>
+                    <td>
+                        {% if perms.api.change_tagvalue %}
+                            <a href="{% url 'webui-tagvalue-update' tagvalue.pk %}">{{ update }}</a>
+                        {% endif %}
+
+                        {% if perms.api.delete_tagvalue %}
+                            <a href="{% url 'webui-tagvalue-delete' tagvalue.pk %}">{{ delete }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p>{{ introduction }}</p>
+
+<hr />
+
+<div class="row">
+    <form action="." method="POST" class="form-horizontal">
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="col-md-2 control-label">{{ field.label }}</label>
+                <div class="col-md-8">
+                    {{ field }}
+                    {% if form.errors %}
+                        {% if form.errors|get_item:field.name %}
+                            <font color="#FF000000"> {{ form.errors|get_item:field.name }} </font>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+        {% endfor %}
+
+        {% if form.errors and form.errors|get_item:"__all__" %}
+        <div class="alert alert-danger"><p>{{ form.errors|get_item:"__all__" }}</p></div>
+        {% endif %}
+
+        <p class="text-center">
+            <input type="submit" class="btn btn-primary" value="{{ btnsubmit }}" />
+            <a href="{% url 'webui-applicationtag-list' %}" class="btn btn-default"> {{ btncancel }} </a>
+        </p>
+    </form>
+</div>
+
+{% endblock %}

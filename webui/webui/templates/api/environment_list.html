@@ -1,0 +1,53 @@
+{% extends "webui/layout.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p> {{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        {% if user.is_superuser %}
+            <div>
+                <p>
+                    <a href="{% url 'webui-environment-create' %}" class="btn btn-success">{{ create }}</a>
+                </p>
+            </div>
+        {% endif %}
+    </nav>
+</div>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="20%">环境名称</th>
+                <th width="30%">描述</th>
+                <th width="15%">最后修改者</th>
+                <th width="15%">最后更新时间</th>
+                <th width="20%">操作</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for environment in environment_list %}
+                <tr>
+                    <td>{{ environment.name }}</td>
+                    <td>{{ environment.description }}</td>
+                    <td>{{ environment.last_modified_by }}</td>
+                    <td>{{ environment.modified_date }}</td>
+                    <td>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'webui-environment-update' environment.pk %}">{{ update }}</a>
+                            <a href="{% url 'webui-environment-delete' environment.pk %}">{{ delete }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}
